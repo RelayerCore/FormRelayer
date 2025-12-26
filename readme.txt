@@ -1,6 +1,6 @@
 === FormRelayer ===
 Contributors: formrelayer
-Donate link: https://formrelayer.com/donate
+Donate link: https://github.com/RelayerCore
 Tags: contact form, form builder, email, submissions, templates
 Requires at least: 6.0
 Tested up to: 6.9
@@ -63,7 +63,7 @@ Unlike Gravity Forms, FormRelayer is **completely free** for unlimited forms.
 
 = Pro Features =
 
-Upgrade to [FormRelayer Pro](https://formrelayer.com/pro) for:
+Upgrade to [FormRelayer Pro](https://github.com/RelayerCore) for:
 
 * **File Attachments** – Allow users to upload files
 * **Export to CSV/Excel** – Generate reports

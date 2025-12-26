@@ -113,7 +113,7 @@ add_filter('fr_admin_email_recipients', function($to, $data) {
 
 ## 💎 Pro Features
 
-Upgrade to [FormRelayer Pro](https://formrelayer.com/pro) for:
+Upgrade to [FormRelayer Pro](https://github.com/RelayerCore) for:
 
 - ✅ File Attachments
 - ✅ Google reCAPTCHA / hCaptcha
@@ -140,10 +140,10 @@ This project is licensed under the GPL v2 or later - see the [LICENSE](LICENSE) 
 
 ## 🙏 Credits
 
-Created with ❤️ by [FormRelayer](https://formrelayer.com)
+Created with ❤️ by [RelayerCore](https://github.com/RelayerCore)
 
 ## 📞 Support
 
-- **Documentation**: [formrelayer.com/docs](https://formrelayer.com/docs)
-- **Support Forum**: [WordPress.org](https://wordpress.org/support/plugin/form-relayer/)
-- **Pro Support**: [formrelayer.com/support](https://formrelayer.com/support)
+- **Documentation**: [GitHub Repository](https://github.com/RelayerCore/FormRelayer)
+- **Support**: [GitHub Issues](https://github.com/RelayerCore/FormRelayer/issues)
+- **Pro Support**: [RelayerCore Profile](https://github.com/RelayerCore)
