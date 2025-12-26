@@ -1,0 +1,35 @@
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs & Editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# Logs & Debugging
+*.log
+debug.log
+error_log
+php_errors.log
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build Directories (if applicable)
+dist/
+build/
+coverage/
+
+# Composer
+composer.phar
+.php-cs-fixer.cache
+.phpunit.result.cache
+
+# WordPress Specific
+wp-config.php
+wp-content/uploads/

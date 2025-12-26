@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FormRelayer 1.0.0\n"
+"Report-Msgid-Bugs-To: https://formrelayer.com/support\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: form-relayer\n"
+
+#. Plugin Name of the plugin
+msgid "FormRelayer"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://formrelayer.com"
+msgstr ""
+
+#. Description of the plugin
+msgid "A powerful, lightweight contact form plugin with admin dashboard, submissions viewer, auto-reply, and file attachments (Pro)."
+msgstr ""
+
+#. Author of the plugin
+msgid "FormRelayer"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://formrelayer.com"
+msgstr ""
+
+msgid "Thank you for your message! We'll get back to you within 24 hours."
+msgstr ""
+
+msgid "Thank you for contacting us"
+msgstr ""
+
+msgid "Dear {name},\\n\\nThank you for reaching out. We have received your message and will respond within 24 hours.\\n\\nBest regards,\\n{site_name} Team"
+msgstr ""

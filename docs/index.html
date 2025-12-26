@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormRelayer Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .prose h2 {
+            margin-top: 2em;
+            margin-bottom: 0.5em;
+            font-weight: 700;
+            color: #1e293b;
+            font-size: 1.5rem;
+        }
+
+        .prose h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+            color: #334155;
+            font-size: 1.25rem;
+        }
+
+        .prose p {
+            margin-bottom: 1em;
+            color: #475569;
+            line-height: 1.75;
+        }
+
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5em;
+            margin-bottom: 1em;
+            color: #475569;
+        }
+
+        .prose code {
+            background: #f1f5f9;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.875em;
+            color: #ea580c;
+            font-family: monospace;
+        }
+
+        .prose pre {
+            background: #1e293b;
+            padding: 1em;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5em;
+            color: #e2e8f0;
+        }
+
+        .prose pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .sidebar-link.active {
+            color: #ef4444;
+            border-left-color: #ef4444;
+            background-color: #fef2f2;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ef4444', // Red-500
+                        primaryLight: '#fef2f2',
+                        secondary: '#475569',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-slate-800" x-data="{ sidebarOpen: false, currentSection: 'introduction' }">
+
+    <!-- Header -->
+    <header
+        class="fixed w-full z-50 bg-white border-b border-slate-200 h-16 flex items-center justify-between px-4 lg:px-8">
+        <div class="flex items-center gap-4">
+            <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden text-slate-500 hover:text-slate-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+            <div class="flex items-center gap-2 font-bold text-xl text-slate-900 tracking-tight">
+                <span class="text-primary">Form</span>Relayer
+                <span
+                    class="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200">v2.1.0</span>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+            <a href="https://formrelayer.relayercore.com" class="hover:text-primary transition">Website</a>
+            <a href="mailto:suruchris.abiye@gmail.com" class="hover:text-primary transition">Support</a>
+            <a href="https://wordpress.org/plugins/form-relayer"
+                class="bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition">Download</a>
+        </div>
+    </header>
+
+    <div class="flex pt-16 min-h-screen">
+
+        <!-- Sidebar -->
+        <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+            class="fixed lg:sticky top-16 left-0 z-40 w-64 h-[calc(100vh-4rem)] bg-white border-r border-slate-200 overflow-y-auto transition-transform lg:translate-x-0 pb-10">
+            <nav class="p-6 space-y-8">
+
+                <div>
+                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Getting Started</h5>
+                    <ul class="space-y-1">
+                        <li><a href="#introduction" @click="currentSection = 'introduction'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'introduction' }">Introduction</a></li>
+                        <li><a href="#installation" @click="currentSection = 'installation'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'installation' }">Installation</a></li>
+                        <li><a href="#quick-start" @click="currentSection = 'quick-start'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'quick-start' }">Quick Start</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Core Features</h5>
+                    <ul class="space-y-1">
+                        <li><a href="#builder" @click="currentSection = 'builder'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'builder' }">Form Builder</a></li>
+                        <li><a href="#fields" @click="currentSection = 'fields'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'fields' }">Field Types</a></li>
+                        <li><a href="#emails" @click="currentSection = 'emails'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'emails' }">Email Notifications</a></li>
+                        <li><a href="#submissions" @click="currentSection = 'submissions'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'submissions' }">Submissions</a></li>
+                        <li><a href="#integrations" @click="currentSection = 'integrations'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'integrations' }">Integrations</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3 text-primary">Pro Features
+                    </h5>
+                    <ul class="space-y-1">
+                        <li><a href="#mailchimp" @click="currentSection = 'mailchimp'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'mailchimp' }">Mailchimp</a></li>
+                        <li><a href="#webhooks" @click="currentSection = 'webhooks'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'webhooks' }">Webhooks</a></li>
+                        <li><a href="#custom-email" @click="currentSection = 'custom-email'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'custom-email' }">Custom HTML Emails</a></li>
+                        <li><a href="#export" @click="currentSection = 'export'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'export' }">Data Export</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Developers</h5>
+                    <ul class="space-y-1">
+                        <li><a href="#hooks" @click="currentSection = 'hooks'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'hooks' }">Hooks & Filters</a></li>
+                        <li><a href="#extensions" @click="currentSection = 'extensions'; sidebarOpen = false"
+                                class="sidebar-link block px-3 py-2 text-sm text-slate-600 border-l-2 border-transparent hover:border-slate-300 hover:text-slate-900 transition"
+                                :class="{ 'active': currentSection === 'extensions' }">Creating Extensions</a></li>
+                    </ul>
+                </div>
+
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 w-full max-w-4xl px-4 lg:px-12 py-10 mx-auto prose prose-slate max-w-none">
+
+            <!-- Introduction -->
+            <section id="introduction" class="scroll-mt-24 mb-20">
+                <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 mb-6">Introduction</h1>
+                <p class="text-lg text-slate-600 mb-8">
+                    FormRelayer is a modern, lightweight, and extensible form builder for WordPress. Designed for small
+                    businesses and developers alike, it bridges the gap between simplicity and power.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6 not-prose">
+                    <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Fast & Lightweight</h3>
+                        <p class="text-slate-600 text-sm">No bloat. FormRelayer loads only the assets it needs, ensuring
+                            your site stays fast.</p>
+                    </div>
+                    <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition">
+                        <div
+                            class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Developer Friendly</h3>
+                        <p class="text-slate-600 text-sm">Built with modern PHP standards, strict typing, and extensive
+                            hooks for customization.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Installation -->
+            <section id="installation" class="scroll-mt-24 mb-20 border-t border-slate-200 pt-10">
+                <h2>Installation</h2>
+                <p>FormRelayer follows standard WordPress plugin installation procedures.</p>
+                <h3>Requirements</h3>
+                <ul>
+                    <li>WordPress 5.8 or higher</li>
+                    <li>PHP 7.4 or higher (PHP 8.0+ recommended)</li>
+                </ul>
+                <h3>Steps</h3>
+                <ol class="list-decimal pl-5 space-y-2 text-slate-600">
+                    <li>Download the <code>form-relayer.zip</code> file.</li>
+                    <li>Go to your WordPress Admin > Plugins > Add New.</li>
+                    <li>Click <strong>Upload Plugin</strong> and select the zip file.</li>
+                    <li>Activate the plugin.</li>
+                </ol>
+            </section>
+
+            <!-- Quick Start -->
+            <section id="quick-start" class="scroll-mt-24 mb-20 border-t border-slate-200 pt-10">
+                <h2>Quick Start</h2>
+                <p>Create your first form in under 60 seconds.</p>
+                <ol class="list-decimal pl-5 space-y-2 text-slate-600">
+                    <li>Navigate to <strong>FormRelayer > Add New</strong>.</li>
+                    <li>Select a template (e.g., "Contact Form") or start blank.</li>
+                    <li>Use the drag-and-drop builder to customize fields.</li>
+                    <li>Click <strong>Save Form</strong>.</li>
+                    <li>Copy the shortcode <code>[form-relayer id="123"]</code> shown in the header.</li>
+                    <li>Paste the shortcode into any Page or Post.</li>
+                </ol>
+            </section>
+
+            <!-- Form Builder -->
+            <section id="builder" class="scroll-mt-24 mb-20 border-t border-slate-200 pt-10">
+                <h2>Form Builder Interface</h2>
+                <p>The visual builder allows you to see your form exactly as it will appear.</p>
+                <img src="images/builder.png" alt="Form Builder Interface"
+                    class="rounded-lg shadow-md border border-slate-200 mb-6 w-full">
+                <ul>
+                    <li><strong>Canvas</strong>: The central area where you drag and drop fields.</li>
+                    <li><strong>Element Picker</strong>: Click the "+" button to add new fields like Text, Email,
+                        Checkboxes, etc.</li>
+                    <li><strong>Field Settings</strong>: Click any field to edit its label, placeholder, and validation
+                        rules in the sidebar.</li>
+                    <li><strong>Form Settings</strong>: Click the "Gear" icon to configure global form settings (Email,
+                        Confirmation, Style).</li>
+                </ul>
+            </section>
+
+            <!-- Fields -->
+            <section id="fields" class="scroll-mt-24 mb-20 border-t border-slate-200 pt-10">
+                <h2>Supported Field Types</h2>
+                <div class="grid md:grid-cols-2 gap-4 not-prose">
+                    <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                        <span class="font-bold text-slate-700 block mb-1">Standard Fields</span>
+                        <ul class="text-sm text-slate-600 list-disc pl-4">
+                            <li>Text / Name</li>
+                            <li>Email / Phone</li>
+                            <li>Textarea (Message)</li>
+                            <li>Number</li>
+                            <li>URL</li>
+                        </ul>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded border border-slate-200">
+                        <span class="font-bold text-slate-700 block mb-1">Choice Fields</span>
+                        <ul class="text-sm text-slate-600 list-disc pl-4">
+                            <li>Select Dropdown</li>
+                            <li>Radio Buttons</li>
+                            <li>Checkbox</li>
+                            <li>Hidden Field</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emails -->
+            <section id="emails" class="scroll-mt-24 mb-20 border-t border-slate-200 pt-10">
+                <h2>Email Notifications</h2>
+                <p>FormRelayer handles both Admin Notifications and User Auto-Replies.</p>
+
+                <h3>Admin Notifications</h3>
+                <p>Receive an email whenever a form is submitted. Configurable per form.</p>
+
+                <h3>Auto-Replies</h3>
+                <p>Send a confirmation email to the user. You can enable this in the <strong>Auto-Reply</strong> tab of
+                    Form Settings.</p>
+
+                <h3>Email Templates</h3>
+                <p>Choose from built-in templates to style your emails:</p>
+                <ul>
+                    <li><strong>Default (Branded)</strong>: Clean, branded email with your site logo.</li>
+                    <li><strong>Plain Text</strong>: Minimalist text-only.</li>
+                    <li><strong>Modern (Pro)</strong>: Sleek, card-based design in multiple color schemes.</li>
+                    <li><strong>Custom HTML (Pro)</strong>: Full control over HTML structure.</li>
+                </ul>
+            </section>
+
+            <!-- Integrations -->
+            <section id="integrations" class="scroll-mt-24 mb-20 border-t border-slate-200 pt-10">
+                <h2>Integrations</h2>
+                <p>Extend FormRelayer by connecting to third-party services.</p>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4">
+                    <p class="font-bold text-blue-800 m-0">Modular Architecture</p>
+                    <p class="text-sm text-blue-700 m-0">Go to <strong>Settings > Integrations</strong> to configure API
+                        keys for active extensions.</p>
+                </div>
+            </section>
+
+            <!-- PRO CONTENT -->
+            <div class="relative py-10 my-10 border-y border-slate-200 bg-slate-50 -mx-4 px-4 lg:-mx-12 lg:px-12">
+                <span class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg">PRO
+                    Features</span>
+
+                <section id="mailchimp" class="scroll-mt-32">
+                    <h2 class="text-primary mt-0">Mailchimp Integration</h2>
+                    <p>Automatically subscribe form submissions to your Mailchimp Audience.</p>
+                    <ol class="list-decimal pl-5 space-y-2 text-slate-600">
+                        <li>Go to <strong>Settings > Integrations</strong> and enter your Mailchimp API Key.</li>
+                        <li>Open your Form in the Builder.</li>
+                        <li>Open <strong>Form Settings</strong> and enable "Marketing Integration".</li>
+                        <li>Enter your <strong>Audience ID</strong> and mapping fields.</li>
+                    </ol>
+                </section>
+
+                <section id="webhooks" class="scroll-mt-32 border-t border-slate-200 mt-10 pt-10">
+                    <h2 class="text-primary">Webhooks</h2>
+                    <p>Send submission data to any URL (Zapier, Make, Slack, Custom Scripts).</p>
+                    <pre><code>POST https://hooks.zapier.com/hooks/catch/12345/abcde</code></pre>
+                    <p>The payload will be sent as a JSON object containing all form fields.</p>
+                </section>
+
+                <section id="custom-email" class="scroll-mt-32 border-t border-slate-200 mt-10 pt-10">
+                    <h2 class="text-primary">Custom HTML Email Templates</h2>
+                    <p>For total control, use the Custom HTML template.</p>
+                    <p><strong>Location:</strong> Form Builder > Settings > General > Email Template > Select "Custom
+                        HTML".</p>
+                    <p>A code editor will appear. You can use full HTML (<code>&lt;html&gt;</code>,
+                        <code>&lt;style&gt;</code>) and placeholders.
+                    </p>
+                    <pre><code>&lt;h1&gt;New Submission&lt;/h1&gt;
+&lt;p&gt;You have received a new message:&lt;/p&gt;
+{all_fields}
+&lt;p&gt;Sent from {site_name}&lt;/p&gt;</code></pre>
+                </section>
+            </div>
+
+            <!-- Developers -->
+            <section id="hooks" class="scroll-mt-24 mb-20 pt-10">
+                <h2>Hooks & Filters</h2>
+                <p>FormRelayer is built to be extended.</p>
+
+                <h3>Actions</h3>
+                <ul class="text-sm font-mono text-slate-600">
+                    <li>formrelayer_submission_complete ($submissionId, $formId, $data)</li>
+                    <li>formrelayer_form_saved ($postId, $post)</li>
+                    <li>formrelayer_settings_integrations_tab</li>
+                </ul>
+
+                <h3>Filters</h3>
+                <ul class="text-sm font-mono text-slate-600">
+                    <li>formrelayer_email_headers ($headers, $formId)</li>
+                    <li>formrelayer_email_subject ($subject, $formId)</li>
+                    <li>formrelayer_spam_check ($isSpam, $data)</li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+
+</html>
